@@ -1191,9 +1191,10 @@ class GoldenDragon extends Pet {
   get stats() {
     const stats = {};
     if (this.level >= 100) {
-      const goldCollectionDigits = this.profile.collections?.mining?.collections
-        ?.find((collection) => collection.id === "GOLD_INGOT")
-        ?.amount.toString().length;
+      const goldCollectionDigits =
+        this.profile.collections?.mining?.collections
+          ?.find((collection) => collection.id === "GOLD_INGOT")
+          ?.amount.toString().length ?? 0;
 
       stats.strength = Math.floor(25 + Math.max(0, this.level - 100) * 0.25) + 10 * goldCollectionDigits;
       stats.bonus_attack_speed = Math.floor(25 + Math.max(0, this.level - 100) * 0.25);
