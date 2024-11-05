@@ -493,12 +493,12 @@ class Armadillo extends Pet {
   }
 
   get abilities() {
-    const list = [this.first, this.second, this.third];
+    const list = [this.first, this.second];
     if (this.rarity >= RARE) {
-      list.push(this.fourth);
+      list.push(this.third);
     }
     if (this.rarity >= LEGENDARY) {
-      list.push(this.fifth);
+      list.push(this.fourth);
     }
     return list;
   }
@@ -506,43 +506,31 @@ class Armadillo extends Pet {
   get first() {
     return {
       name: "§6Rideable",
-      desc: [`§7Right-click on your summoned pet to ride it!`],
+      desc: [`§7Right-click on your summoned pet to ride it! Moves faster based on your §f${SYMBOLS.speed} Speed§7.`],
     };
   }
 
   get second() {
     return {
       name: "§6Tunneler",
-      desc: [
-        `§7The Armadillo breaks all stone or ore in its path while you are riding it in the §3Crystal Hollows §7using your held item.`,
-      ],
+      desc: [`§7While riding in the §5Crystal Hollows§7, this Pet breaks all blocks in its path using your held item.`],
     };
   }
 
   get third() {
+    const mult = getValue(this.rarity, { rare: 0.2, epic: 0.3, legendary: 0.4 });
     return {
-      name: "§6Earth Surfer",
-      desc: [`§7The Armadillo moves faster based on your §f${SYMBOLS.speed} Speed§7.`],
+      name: "§6Rolling Miner",
+      desc: [
+        `§7Every §a${round(60 - this.level * mult, 1)} §7seconds, the next §5Gemstone§7 you mine gives §a2x §7drops.`,
+      ],
     };
   }
 
   get fourth() {
-    const mult = getValue(this.rarity, { rare: 0.2, epic: 0.3 });
     return {
-      name: "§6Rolling Miner",
-      desc: [`§7Every §a${round(60 - this.level * mult, 1)} §7seconds, the next gemstone you mine gives §a2x §7drops.`],
-    };
-  }
-
-  get fifth() {
-    const mult = getValue(this.rarity, { legendary: 0.5 });
-    return {
-      name: "§6Mobile Tank",
-      desc: [
-        `§7For every §a${round(100 - this.level * mult, 1)} ${SYMBOLS.defense} Defense§7, gain §f+1 ${
-          SYMBOLS.speed
-        } Speed §7and §6+1 ${SYMBOLS.mining_speed} Mining Speed§7.`,
-      ],
+      name: "§6Long Claws",
+      desc: [`§7Grants §e+${round(this.level * 3)} ${SYMBOLS.mining_spread} Mining Spread§7 while mining Hard Stone.`],
     };
   }
 }
