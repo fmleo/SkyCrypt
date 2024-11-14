@@ -1464,7 +1464,7 @@ class Mole extends Node {
   }
 
   perk(level) {
-    const val = round(50 + (this.level - 1) * (350 / 199), 2);
+    const val = round(50 + (level - 1) * (350 / 199), 2);
     return [`§7Grants §e+${val} ${SYMBOLS.mining_spread} Mining Spread §7when mining Hard Stone.`];
   }
 }
@@ -1591,7 +1591,7 @@ class EfficientMiner extends Node {
   }
 
   perk(level) {
-    const val = round(level * 3, 2);
+    const val = floor(level * 3);
     return [`§7Grants §e+${val} ${SYMBOLS.mining_spread} Mining Spread§7.`];
   }
 }
