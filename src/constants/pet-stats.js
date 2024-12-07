@@ -457,6 +457,9 @@ class Rabbit extends Pet {
     if (this.rarity >= LEGENDARY) {
       list.push(this.third);
     }
+    if (this.rarity >= MYTHIC) {
+      list.push(this.fourth);
+    }
     return list;
   }
 
@@ -481,6 +484,15 @@ class Rabbit extends Pet {
     return {
       name: "§6Efficient Farming",
       desc: [`§7Farming minions work §a${round(this.level * mult, 1)}% §7faster while on your island.`],
+    };
+  }
+
+  get fourth() {
+    return {
+      name: "§6Chocolate Injections",
+      desc: [
+        `§7Increases §6Chocolate Factory§7 production by §a+${round(0.01 + (this.level - 1) * 0.0004, 3)}x§7. Duplicate §aChocolate Rabbits§7 that you find grant §6${round(1.3 + (this.level - 1) * 0.32, 1)}% Chocolate§7.`,
+      ],
     };
   }
 }
